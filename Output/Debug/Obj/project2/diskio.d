@@ -1,20 +1,13 @@
 Output/Debug/Obj/project2/diskio.o: \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/diskio.c \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/diskio.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/ff.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/ffconf.h \
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/diskio.c \
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/diskio.h \
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/ff.h \
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/ffconf.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/stdint.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/__SEGGER_RTL.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/__SEGGER_RTL_ConfDefaults.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/__SEGGER_RTL_Conf.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/__SEGGER_RTL_Arm_Conf.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/STM32L432KC_SPI.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/STM32L4xx/Device/Include/stm32l432xx.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/CMSIS_5/CMSIS/Core/Include/core_cm4.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/CMSIS_5/CMSIS/Core/Include/cmsis_version.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/CMSIS_5/CMSIS/Core/Include/cmsis_compiler.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/CMSIS_5/CMSIS/Core/Include/cmsis_gcc.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/CMSIS_5/CMSIS/Core/Include/mpu_armv7.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/STM32L4xx/Device/Include/system_stm32l4xx.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/SD_lowlevel.h \
-  /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/stdbool.h
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/SD_lowlevel.h \
+  /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/stdbool.h \
+  /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/string.h

@@ -1,4 +1,3 @@
-// STM32L432KC_SPI.h
 #ifndef STM32L4_SPI_H
 #define STM32L4_SPI_H
 
@@ -10,20 +9,13 @@
 #define SPI_MOSI PB5
 #define SPI_MISO PB4
 
-///////////////////////////////////////////////////////////////////////////////
-// SPI Core Functions
-///////////////////////////////////////////////////////////////////////////////
-
 void initSPI(int br, int cpol, int cpha);
 char spiSendReceive(char send);
 
-///////////////////////////////////////////////////////////////////////////////
-// SD Card Helper Functions
-///////////////////////////////////////////////////////////////////////////////
-
+/* SD helper wrappers used by SD_lowlevel.c */
 void SD_Select(void);
 void SD_Deselect(void);
 uint8_t SD_SPI_Transmit(uint8_t data);
 uint8_t SD_SPI_Receive(void);
 
-#endif
+#endif /* STM32L4_SPI_H */

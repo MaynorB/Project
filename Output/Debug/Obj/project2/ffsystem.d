@@ -1,7 +1,7 @@
 Output/Debug/Obj/project2/ffsystem.o: \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/ffsystem.c \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/ff.h \
-  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/ffconf.h \
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/ffsystem.c \
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/ff.h \
+  /Users/mynority/Documents/SEGGER\ Embedded\ Studio\ Projects/project2/Project/ffconf.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/stdint.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/__SEGGER_RTL.h \
   /Applications/SEGGER/SEGGER\ Embedded\ Studio\ 8.24/include/__SEGGER_RTL_ConfDefaults.h \

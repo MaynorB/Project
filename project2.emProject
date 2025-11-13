@@ -61,17 +61,15 @@
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
       <file file_name="diskio.c" />
       <file file_name="diskio.h" />
-      <file file_name="DS1722.c" />
-      <file file_name="DS1722.h" />
       <file file_name="ff.c" />
       <file file_name="ff.h" />
+      <file file_name="ff_time.c" />
       <file file_name="ffconf.h" />
       <file file_name="ffsystem.c" />
       <file file_name="ffunicode.c" />
       <file file_name="main.c" />
       <file file_name="SD_lowlevel.c" />
       <file file_name="SD_lowlevel.h" />
-      <file file_name="STM32F401RE_TIM.c" />
       <file file_name="STM32L432KC.h" />
       <file file_name="STM32L432KC_FLASH.c" />
       <file file_name="STM32L432KC_FLASH.h" />
