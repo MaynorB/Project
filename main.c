@@ -117,5 +117,9 @@ int main(void) {
     // 6. Close file and stay idle
     ///////////////////////////////////////////////////////////////////////////
     f_close(&file);
-    while (1);
+    while (1){
+    led_off();
+    delay_ms(100);
+    blink(1);
+    }
 }
