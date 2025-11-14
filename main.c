@@ -53,13 +53,13 @@ static void led_off(void) {
 int main(void) {
     // Basic setup
     SystemCoreClockUpdate();
+    initSPI(0b111 , 0, 0); // Baud = fPCLK/8, mode 0 (CPOL=0, CPHA=0)
     pinMode(LED_PIN, GPIO_OUTPUT);
     led_off();
 
     ///////////////////////////////////////////////////////////////////////////
     // 1. Initialize SPI
     ///////////////////////////////////////////////////////////////////////////
-    initSPI(0b011, 0, 0); // Baud = fPCLK/8, mode 0 (CPOL=0, CPHA=0)
 
     ///////////////////////////////////////////////////////////////////////////
     // 2. Initialize SD card (low-level)
