@@ -18,4 +18,5 @@ Output/Debug/Obj/project2/main.o: \
   C:\Users\Mayno\Documents\Git\Project\ff.h \
   C:\Users\Mayno\Documents\Git\Project\ffconf.h \
   C:\Users\Mayno\Documents\Git\Project\diskio.h \
-  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.18\include\string.h
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.18\include\string.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.18\include\stdio.h

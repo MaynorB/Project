@@ -5,6 +5,7 @@
 #include "ff.h"    // FatFS core
 #include "diskio.h"
 #include <string.h>
+#include <stdio.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 // Debug LED setup
@@ -47,6 +48,15 @@ static void led_off(void) {
     digitalWrite(LED_PIN, 0);
 }
 
+// Function used by printf to send characters to the laptop
+int _write(int file, char *ptr, int len) {
+  int i = 0;
+  for (i = 0; i < len; i++) {
+    ITM_SendChar((*ptr++));
+  }
+  return len;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // MAIN
 ///////////////////////////////////////////////////////////////////////////////
@@ -67,59 +77,95 @@ int main(void) {
     uint8_t sdStatus = SD_Init();
     if (sdStatus != SD_OK) {
         // 🔴 Blink 3x = SD init failed
+        printf("SD FAILED \n");
         blink(3);
         while (1);
     }
+    printf("SD INITIALIZED \n");
+      ///////////////////////////////////////////////////////////////////////////
+      // 3. Mount FAT filesystem and open file
+      ///////////////////////////////////////////////////////////////////////////
+      fres = f_mount(&FatFs, "", 1);
+      if (fres != FR_OK) {
+          // 🔴 Blink 4x = Mount failed
+          printf("MOUNT FAILED \n");
+          blink(4);
+          while (1);
+      }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 3. Mount FAT filesystem
-    ///////////////////////////////////////////////////////////////////////////
-    fres = f_mount(&FatFs, "", 1);
-    if (fres != FR_OK) {
-        // 🔴 Blink 4x = Mount failed
-        blink(4);
-        while (1);
+   fres = f_open(&file, "Crepe.wav", FA_READ); 
+   if (fres != FR_OK) { 
+      // 🔴 Blink 5x = File not found 
+      blink(5); 
+      while (1); 
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // 4. Try to open .wav file
-    ///////////////////////////////////////////////////////////////////////////
-    fres = f_open(&file, "Crepe.wav", FA_READ);
-    if (fres != FR_OK) {
-        // 🔴 Blink 5x = File not found
-        blink(5);
-        while (1);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // 5. Read a few bytes from the file header (e.g., to verify RIFF/WAVE)
-    ///////////////////////////////////////////////////////////////////////////
-    BYTE buffer[16];
+     printf("FOUND FILE \n");
+    ///////////////////////////////////////////////////////////////////////////////
+    // 4. Read WAV header (44 bytes)
+    ///////////////////////////////////////////////////////////////////////////////
+    BYTE header[44];
     UINT bytesRead;
 
-    fres = f_read(&file, buffer, sizeof(buffer), &bytesRead);
-    if (fres != FR_OK || bytesRead == 0) {
-        // 🔴 Blink 6x = Read error
+    fres = f_read(&file, header, 44, &bytesRead);
+    if (fres != FR_OK || bytesRead != 44) {
+        printf("Failed to read WAV header!\n");
         blink(6);
         while (1);
     }
 
-    // Check if file starts with "RIFF"
-    if (memcmp(buffer, "RIFF", 4) == 0 && memcmp(&buffer[8], "WAVE", 4) == 0) {
-        // ✅ File is a valid WAV file
-        led_on();  // Solid ON = success
-    } else {
-        // ⚠️ File not recognized
-        blink(2);
+    // Print header
+    printf("=== WAV HEADER (44 bytes) ===\n");
+    for (int i = 0; i < 44; i++) {
+        printf("%02X ", header[i]);
+        if (i % 16 == 15) printf("\r\n");
+    }
+    printf("\n");
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // 5. Determine PCM data size
+    ///////////////////////////////////////////////////////////////////////////////
+    uint32_t dataSize = 
+          (header[40] << 0)
+        | (header[41] << 8)
+        | (header[42] << 16)
+        | (header[43] << 24);
+
+    printf("WAV DATA SIZE = %lu bytes\n", dataSize);
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // 6. Read entire audio file in 512-byte chunks
+    ///////////////////////////////////////////////////////////////////////////////
+    BYTE buffer[512];
+    UINT br;
+    uint32_t totalRead = 0;
+
+    printf("=== BEGIN AUDIO DATA ===\n");
+
+    while (totalRead < dataSize) {
+        uint32_t toRead = (dataSize - totalRead);
+        if (toRead > 512) toRead = 512;
+
+        fres = f_read(&file, buffer, toRead, &br);
+        if (fres != FR_OK || br == 0) {
+            printf("ERROR: Failed during streaming audio!\n");
+            break;
+        }
+
+        totalRead += br;
+
+        // Dump PCM bytes to ITM SWO in hex
+        for (int i = 0; i < br; i++) {
+            printf("%02X ", buffer[i]);
+            if ((i % 32) == 31) printf("\r\n");
+        }
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 6. Close file and stay idle
-    ///////////////////////////////////////////////////////////////////////////
+    printf("\n=== END AUDIO DATA ===\n");
+    printf("Read total %lu bytes.\n", totalRead);
+
     f_close(&file);
+
+    printf("File Closed");
     while (1){
-    led_off();
-    delay_ms(100);
-    blink(1);
     }
 }
